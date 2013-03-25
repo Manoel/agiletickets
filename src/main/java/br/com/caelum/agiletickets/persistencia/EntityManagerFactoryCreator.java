@@ -14,10 +14,19 @@ import br.com.caelum.vraptor.ioc.ComponentFactory;
 public class EntityManagerFactoryCreator implements ComponentFactory<EntityManagerFactory>{
 
 	private EntityManagerFactory factory;
+	private final String ambiente;
+
+	public EntityManagerFactoryCreator() {
+		this("default");
+	}
+
+	public EntityManagerFactoryCreator(String ambiente) {
+		this.ambiente = ambiente;
+	}
 
 	@PostConstruct
 	public void create() {
-		factory = Persistence.createEntityManagerFactory("default");
+		factory = Persistence.createEntityManagerFactory(ambiente);
 	}
 
 	@Override
